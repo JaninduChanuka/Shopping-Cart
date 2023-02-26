@@ -7,11 +7,12 @@
   <title>
     <%=title%>
   </title>
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script> 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 
 </head>
 <div class="ajaxbg">
@@ -20,69 +21,82 @@
     <img width="25px" src="/images/ajax-loader.gif" alt="">
   </div>
 </div>
+
 <body>
-    <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">  
-      <div class="container">
-        <a class="navbar-brand" href="/">CmsShoppingCart</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <% pages.forEach(function (page) { %>
-              <% if (page.slug=="home" ) {%>
-                <li class="nav-item"> <a class="nav-link" href="/"> <%=page.title %> </a> </li>
-                <% } else { %>
-                  <li class="nav-item"> <a class="nav-link" href="/<%=page.slug %>"> <%=page.title %> </a> </li>
-                  <% } %>
-            <% }); %>
-          </ul>
-          <ul class="navbar-nav navbar-right">
-            <li class="nav-item"> <a class="nav-link" href="/cart/checkout">My Cart ( 
-              <% if (typeof cart !==  "undefined" ) {%>
-                <%= cart.length %> 
-                <% } else { %>
-                0
-              <% } %>
-              )</a>         
-            </li> 
-            <% if(user){ %>
-              <li class="nav-item"><a class="nav-link disabled text-light fw-bold">[ Hi, <%= user.username %> ]</a></li>   
-              <li class="nav-item"><a class="nav-link" href="/users/logout">Logout</a></li>   
-            <% }else{ %>  
-              <li class="nav-item"><a class="nav-link" href="/users/register">Register</a></li>   
-              <li class="nav-item"><a class="nav-link" href="/users/login">Login</a></li>   
-            <% } %>    
-            <% if(user && user.admin == 1){ %>
-              <li class="nav-item"><a class="nav-link" href="/admin/pages">Admin Area</a></li>   
-            <% }%>          
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <br>
+  <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
     <div class="container">
-      <%- messages('messages', locals) %>
-      
+      <a class="btn" href="/">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" class="bi bi-cart3 icon" viewBox="0 0 16 16">
+          <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        </svg>
+      </a>
+      <a class="navbar-brand fs-5 fw-bold" href="/">Shopping Cart</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <% pages.forEach(function (page) { %>
+            <% if (page.slug=="home" ) {%>
+              <li class="nav-item"> <a class="nav-link" href="/">
+                  <%=page.title %>
+                </a> </li>
+              <% } else { %>
+                <li class="nav-item"> <a class="nav-link" href="/<%=page.slug %>">
+                    <%=page.title %>
+                  </a> </li>
+                <% } %>
+                  <% }); %>
+        </ul>
+        <ul class="navbar-nav navbar-right">
+          <li class="nav-item"> <a class="nav-link" href="/cart/checkout">My Cart (
+              <% if (typeof cart !=="undefined" ) {%>
+                <%= cart.length %>
+                  <% } else { %>
+                    0
+                    <% } %>
+                      )
+            </a>
+          </li>
+          <% if(user){ %>
+            <li class="nav-item"><a class="nav-link disabled text-light fw-bold">[ Hi, <%= user.username %> ]</a></li>
+            <li class="nav-item"><a class="nav-link" href="/users/logout">Logout</a></li>
+            <% }else{ %>
+              <li class="nav-item"><a class="nav-link" href="/users/register">Register</a></li>
+              <li class="nav-item"><a class="nav-link" href="/users/login">Login</a></li>
+              <% } %>
+                <% if(user && user.admin==1){ %>
+                  <li class="nav-item"><a class="nav-link" href="/admin/pages">Admin Area</a></li>
+                  <% }%>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <br>
+  <div class="container">
+    <%- messages('messages', locals) %>
+
       <% if (errors) { %>
         <% errors.forEach(function(error){ %>
           <div class="alert alert-danger" role="alert">
             <%=error.msg%>
           </div>
-        <% }); %>
-      <% } %>
-        <div class="row">
-          <div class="col-xs-12 col-md-3">
-            <h3>Categories</h3>
-            <div class="list-group">
-             <a  class="list-group-item list-group-item-action list-group-item-dark fw-bold" href="/products">All products</a>
-              <% categories.forEach(function (c) { %>
-                    <a class="list-group-item list-group-item-action list-group-item-dark fw-bold" href="/products/<%= c.slug %>"><%=c.title %></a>
-              <% }); %>
-            </div>
-          </div>
-          <div class="col-xs-12 col-md-1"></div>
-          <div class="col-xs-12 col-md-8">
-
-
+          <% }); %>
+            <% } %>
+              <div class="row">
+                <div class="col-xs-12 col-md-3">
+                  <h3>Categories</h3>
+                  <div class="list-group">
+                    <a class="list-group-item list-group-item-action list-group-item-dark fw-bold" href="/products">All
+                      products</a>
+                    <% categories.forEach(function (c) { %>
+                      <a class="list-group-item list-group-item-action list-group-item-dark fw-bold"
+                        href="/products/<%= c.slug %>">
+                        <%=c.title %>
+                      </a>
+                      <% }); %>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-md-1"></div>
+                <div class="col-xs-12 col-md-8">

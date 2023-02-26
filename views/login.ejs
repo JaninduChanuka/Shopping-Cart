@@ -1,0 +1,15 @@
+<%-include("_layouts/header") %>
+<h1><%=title %> </h1>
+
+<form action="/users/login" method="post">
+    <div class="mb-3">
+        <label for="">Username</label>
+        <input type="text" name="username" class="form-control" placeholder="Username">
+    </div>
+    <div class="mb-3">
+        <label for="">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="Password">
+    </div>    
+    <button class="btn btn-dark" type="submit">Login</button>
+</form>
+<%-include("_layouts/footer") %>
